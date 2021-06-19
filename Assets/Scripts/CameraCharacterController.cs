@@ -21,14 +21,22 @@ public class CameraCharacterController : MonoBehaviour
         else
             Cursor.lockState = CursorLockMode.Locked;
 
-        // Mouse controls
-        var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-        md = Vector2.Scale(md, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
-        _smoothV.x = Mathf.Lerp(_smoothV.x, md.x, 1f / smoothing);
-        _smoothV.y = Mathf.Lerp(_smoothV.y, md.y, 1f / smoothing);
-        _mouseLook += _smoothV;
-        _mouseLook.y = Math.Min(Math.Max(_mouseLook.y, -90), 90);
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            // Mouse controls
+            var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            md = Vector2.Scale(md, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
+            _smoothV.x = Mathf.Lerp(_smoothV.x, md.x, 1f / smoothing);
+            _smoothV.y = Mathf.Lerp(_smoothV.y, md.y, 1f / smoothing);
+            _mouseLook += _smoothV;
+            _mouseLook.y = Math.Min(Math.Max(_mouseLook.y, -90), 90);
 
-        transform.localRotation = Quaternion.Euler(-_mouseLook.y, _mouseLook.x, 0);
+            transform.localRotation = Quaternion.Euler(-_mouseLook.y, _mouseLook.x, 0);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                GetComponent<Attack>().AttackEntity();
+            }
+        }
     }
 }

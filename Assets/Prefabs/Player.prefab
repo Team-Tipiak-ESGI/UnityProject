@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7378586837586326075}
   - component: {fileID: 7378586837586326052}
   - component: {fileID: 7378586837586326078}
+  - component: {fileID: 3377067914107492472}
   - component: {fileID: 8814604235885774523}
   m_Layer: 0
   m_Name: Player
@@ -174,6 +175,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 5
   smoothing: 2
+--- !u!114 &3377067914107492472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7378586837586326053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dee127541bda7f479d2b9a498137a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  strength: 5
 --- !u!114 &8814604235885774523
 MonoBehaviour:
   m_ObjectHideFlags: 0
