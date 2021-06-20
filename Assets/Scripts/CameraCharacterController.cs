@@ -38,5 +38,10 @@ public class CameraCharacterController : MonoBehaviour
                 GetComponent<Attack>().AttackEntity();
             }
         }
+
+        if (GetComponent<Attack>().health <= 0)
+        {
+            // TODO: Go back to main menu
+        }
     }
 }

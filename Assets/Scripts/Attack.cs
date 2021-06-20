@@ -4,6 +4,8 @@ public class Attack : MonoBehaviour
 {
     public float health = 100;
     public float strength = 1;
+    public int level = 0;
+    public GameObject deathParticles;
     
     public void AttackEntity()
     {
@@ -21,6 +23,18 @@ public class Attack : MonoBehaviour
             Attack attack = hit.collider.GetComponent<Attack>();
             if (attack == null) return;
             hit.collider.GetComponent<Attack>().health -= this.strength;
+
+            if (GetComponent<Attack>().health <= 0)
+            {
+                Destroy(gameObject);
+                level++; // Increment level
+                
+                if (deathParticles != null)
+                {
+                    Instantiate(deathParticles, transform.position, Quaternion.identity);
+                    deathParticles.GetComponent<ParticleSystem>().Play();
+                }
+            }
         }
     }
 }

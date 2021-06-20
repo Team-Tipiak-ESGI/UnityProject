@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -12,10 +10,10 @@ public class EnemyAI : MonoBehaviour
     public float speed = 10.0f;
     public float gravity = 10.0f;
     public float maxVelocityChange = 10.0f;
-    public float toggleMax = 10;
+    public float toggleMax = 10f;
     public float toggleMin = 1.5f;
+    public float attackRange = 2f;
     public GameObject target;
-    public GameObject deathParticles;
 
     void Awake()
     {
@@ -28,7 +26,17 @@ public class EnemyAI : MonoBehaviour
     {
         _grounded = true;
     }
-    
+
+    private void Update()
+    {
+        float dist = Vector3.Distance(target.transform.position, this.transform.position);
+
+        if (toggleMin < dist && dist < toggleMax)
+        {
+            transform.LookAt(target.transform.position);
+        }
+    }
+
     void FixedUpdate () {
         if (_grounded)
         {
@@ -36,7 +44,7 @@ public class EnemyAI : MonoBehaviour
             
             if (toggleMin < dist && dist < toggleMax)
             {
-                Vector3 targetVelocity = (target.transform.position - this.transform.position).normalized;
+                Vector3 targetVelocity = new Vector3(0, 0, 1);
 
                 // Calculate how fast we should be moving
                 targetVelocity = transform.TransformDirection(targetVelocity);
@@ -50,18 +58,16 @@ public class EnemyAI : MonoBehaviour
                 velocityChange.y = 0;
                 GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
             }
+
+            if (dist < attackRange)
+            {
+                GetComponent<Attack>().AttackEntity();
+            }
         }
  
         // We apply gravity manually for more tuning control
         GetComponent<Rigidbody>().AddForce(new Vector3 (0, -gravity * GetComponent<Rigidbody>().mass, 0));
  
         _grounded = false;
-
-        if (GetComponent<Attack>().health <= 0)
-        {
-            Destroy(gameObject);
-            Instantiate(deathParticles, transform.position, Quaternion.identity);
-            deathParticles.GetComponent<ParticleSystem>().Play();
-        }
     }
 }
