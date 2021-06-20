@@ -148,3 +148,4 @@ MonoBehaviour:
   toggleMax: 10
   toggleMin: 1.5
   target: {fileID: 0}
+  deathParticles: {fileID: 5342710118341761057, guid: 10f64c953d35acd43a5b4a4362254807, type: 3}

@@ -18,8 +18,6 @@ public class Attack : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
             Attack attack = hit.collider.GetComponent<Attack>();
             if (attack == null) return;
             hit.collider.GetComponent<Attack>().health -= this.strength;

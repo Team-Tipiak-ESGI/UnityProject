@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour
     public float toggleMax = 10;
     public float toggleMin = 1.5f;
     public GameObject target;
+    public GameObject deathParticles;
 
     void Awake()
     {
@@ -55,5 +56,12 @@ public class EnemyAI : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(new Vector3 (0, -gravity * GetComponent<Rigidbody>().mass, 0));
  
         _grounded = false;
+
+        if (GetComponent<Attack>().health <= 0)
+        {
+            Destroy(gameObject);
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            deathParticles.GetComponent<ParticleSystem>().Play();
+        }
     }
 }
