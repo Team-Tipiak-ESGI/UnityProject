@@ -1,12 +1,20 @@
+using System;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    public float StartHealth { get; private set; }
     public float health = 100;
     public float strength = 1;
     public int level = 0;
     public GameObject deathParticles;
+
+    public void Start()
+    {
+        StartHealth = health;
+    }
     
+
     public void AttackEntity()
     {
         // Bit shift the index of the layer (8) to get a bit mask
