@@ -40,7 +40,7 @@ public class MapGenerator : MonoBehaviour {
         
         for (int i = 0; i < enemyCount; i++)
         {
-            Vector3 position = new Vector3(Random.Range(-mapSize, mapSize), 500, Random.Range(-mapSize, mapSize));
+            Vector3 position = new Vector3(Random.Range(-mapSize, mapSize), 100, Random.Range(-mapSize, mapSize));
             GameObject e = Instantiate(enemy, position, Quaternion.identity);
             e.GetComponent<EnemyAI>().target = target;
         }

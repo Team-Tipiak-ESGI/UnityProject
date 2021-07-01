@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -38,9 +39,9 @@ public class Attack : MonoBehaviour
                 deathParticles.GetComponent<ParticleSystem>().Play();
             }
 
-            if (GetComponent<Attack>().health <= 0)
+            if (hit.collider.GetComponent<Attack>().health <= 0)
             {
-                Destroy(gameObject);
+                Destroy(hit.collider.GameObject());
                 level++; // Increment level
                 
                 if (deathParticles != null)
@@ -54,6 +55,6 @@ public class Attack : MonoBehaviour
 
     private void Update()
     {
-        this.health += Time.deltaTime;
+        this.health = Math.Min(this.health + Time.deltaTime, this.StartHealth);
     }
 }
