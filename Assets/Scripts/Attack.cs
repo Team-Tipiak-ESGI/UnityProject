@@ -24,6 +24,12 @@ public class Attack : MonoBehaviour
             Attack attack = hit.collider.GetComponent<Attack>();
             if (attack == null) return;
             hit.collider.GetComponent<Attack>().health -= this.strength;
+            
+            if (deathParticles != null)
+            {
+                Instantiate(deathParticles, transform.position, Quaternion.identity);
+                deathParticles.GetComponent<ParticleSystem>().Play();
+            }
 
             if (GetComponent<Attack>().health <= 0)
             {
