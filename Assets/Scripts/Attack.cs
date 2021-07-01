@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -36,5 +37,10 @@ public class Attack : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Update()
+    {
+        this.health += Time.deltaTime;
     }
 }

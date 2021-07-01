@@ -1,11 +1,16 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour {
 
     public enum DrawMode {NoiseMap, ColourMap, Mesh};
     public DrawMode drawMode;
+
+    public int mapSize;
+    public int enemyCount;
+    public GameObject target;
 
     const int mapChunkSize = 241;
     [Range(0,6)]
@@ -27,9 +32,18 @@ public class MapGenerator : MonoBehaviour {
 
     public TerrainType[] regions;
 
+    public GameObject enemy;
+
     private void Start()
     {
         GenerateMap();
+        
+        for (int i = 0; i < enemyCount; i++)
+        {
+            Vector3 position = new Vector3(Random.Range(-mapSize, mapSize), 500, Random.Range(-mapSize, mapSize));
+            GameObject e = Instantiate(enemy, position, Quaternion.identity);
+            e.GetComponent<EnemyAI>().target = target;
+        }
     }
 
     public void GenerateMap() {
