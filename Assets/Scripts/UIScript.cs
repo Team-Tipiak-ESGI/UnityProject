@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +16,7 @@ public class UIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.IsDestroyed()) return;
         healhBar.GetComponent<Slider>().maxValue = player.GetComponent<Attack>().StartHealth;
         healhBar.GetComponent<Slider>().value = player.GetComponent<Attack>().health;
     }

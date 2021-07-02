@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (target.IsDestroyed()) return;
         float dist = Vector3.Distance(target.transform.position, this.transform.position);
 
         if (toggleMin < dist && dist < toggleMax)
@@ -42,7 +44,9 @@ public class EnemyAI : MonoBehaviour
         healthBar.GetComponent<Slider>().value = GetComponent<Attack>().health;
     }
 
-    void FixedUpdate () {
+    void FixedUpdate ()
+    {
+        if (target.IsDestroyed()) return;
         if (_grounded)
         {
             float dist = Vector3.Distance(target.transform.position, this.transform.position);
