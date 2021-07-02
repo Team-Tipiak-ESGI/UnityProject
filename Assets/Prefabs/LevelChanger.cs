@@ -15,6 +15,6 @@ public class LevelChanger : MonoBehaviour
 
     void TaskOnClick()
     {
-        SceneManager.LoadScene(EventSystem.current.currentSelectedGameObject.name);
+        SceneManager.LoadScene("Procedural");
     }
 }
