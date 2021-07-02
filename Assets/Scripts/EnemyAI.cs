@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -14,6 +15,7 @@ public class EnemyAI : MonoBehaviour
     public float toggleMin = 1.5f;
     public float attackRange = 2f;
     public GameObject target;
+    public GameObject healthBar;
 
     void Awake()
     {
@@ -35,6 +37,9 @@ public class EnemyAI : MonoBehaviour
         {
             transform.LookAt(target.transform.position);
         }
+
+        healthBar.GetComponent<Slider>().maxValue = GetComponent<Attack>().StartHealth;
+        healthBar.GetComponent<Slider>().value = GetComponent<Attack>().health;
     }
 
     void FixedUpdate () {
